@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<title>Mongoose Assignment</title>
+<head>
+
+</head>
+<body>
+  <div id="Welcome">
+    <h1>Welcome to Message Board</h1>
+    <hr>
+  </div>
+  <form action="/message" method="post">
+    <label for='name'>Name:</label>
+    <input id="name" type="text" name="name"><br>
+    <label for='message'>Message:</label>
+    <textarea row="4" cols="50" id="message" type="textarea" name='message'></textarea>
+    <br>
+    <button>Post Message!</button>
+  </form>
+  <br>
+  <br>
+  <hr>
+  <div id="show_message">
+    <h4>Show messages</h4>
+    <ul>
+      <% for(var i = 0; i < posts.length; i++) { %>
+        <li>
+          <h3>Name: <%=posts[i].name%></h3>
+          <h3>Message: <%=posts[i].message%></h3>
+          <p>Comments:</p>
+          
+          <% var  comments = posts[i].comments %>
+          <% for(var j = 0; j < comments.length; j++){ %>
+            <li><%=comments[j].name%></li>
+            <%=comments[j].comment%>
+          <% } %>
+
+          <form action="/comment/<%=posts[i]._id%>" method="post">
+            <label for='name'>Name:</label>
+            <input id="name" type="text" name="name"><br>
+            <label for='message'>comment:</label>
+            <textarea row="4" cols="50" id="message" type="textarea" name='comment'></textarea>
+            <br>
+            <button>Comment!</button>
+          </form>
+
+        </li>
+      <hr>
+      <% } %>
+    </ul>
+
+  </div>
+</body>
+</html>
